@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.land {
+  fill: #222;
+}
+
+.county-boundary {
+  fill: none;
+  stroke: #fff;
+  stroke-width: .5px;
+}
+
+.state-boundary {
+  fill: none;
+  stroke: #fff;
+}
+
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://d3js.org/topojson.v1.min.js"></script>
+<script src="http://d3js.org/queue.v1.min.js"></script>
+<script>
+
+var width = 960,
+    height = 500;
+
+var projection = d3.geo.albersUsa()
+    .scale(1000)
+    .translate([width / 2, height / 2]);
+
+var path = d3.geo.path()
+    .projection(projection);
+
+var color = d3.scale.linear()
+    .domain([0, 1])
+    .range(["#f2f0f7", "#54278f"]);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+queue()
+    .defer(d3.json, "us.json")
+    .defer(d3.json, "engineer_counts.json")
+    .await(ready);
+
+
+function ready(error, us, engineers) {
+
+  svg.append("g")
+      .attr("class", "state-land")
+    .selectAll("path")
+      .data(topojson.feature(us, us.objects.us_geoJSON).features)
+    .enter().append("path")
+      .attr("d", path)
+      .style("fill", function(d) { return color(engineers.adjusted_STEM_count[d.id]); });
+
+  svg.append("path")
+      .datum(topojson.mesh(us, us.objects.us_geoJSON, function(a, b) { return a.id !== b.id; }))
+      .attr("class", "state-boundary")
+      .attr("d", path);
+}
+
+d3.select(self.frameElement).style("height", height + "px");
+
+</script>

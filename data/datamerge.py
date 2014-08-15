@@ -19,11 +19,12 @@ degree_data = read_acs_data(os.path.join(args.csvpath, "ACS_12_3YR_C15010_with_a
 
 merged_data = population_data.merge(degree_data, on="GEO.id")
 engineer_counts = pd.DataFrame.from_items([
-    ('geo_id', merged_data['GEO.id2_x']),
+    ('geo_id', 'US' + merged_data['GEO.id2_x'].map("{:02}".format)), #Census data has a leading 0 on the geo ids
     ('state_name', merged_data['GEO.display-label_x']),
     ('STEM_count', merged_data['HD01_VD02'] + merged_data['HD01_VD03']),
     ('total_population', merged_data['HC01_VC03']),
     ])
+engineer_counts.set_index(['geo_id'], inplace=True)
 
 #Adjust the STEM count by dividing by that state's population
 engineer_counts['adjusted_STEM_count'] = engineer_counts['STEM_count'] / engineer_counts['total_population']
