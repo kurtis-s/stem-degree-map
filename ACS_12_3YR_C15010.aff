@@ -1,0 +1,8 @@
+<query schema-version="1.0" lang="en" type="table" sig="MfQVI0cE_eV5lr33rjtQJhLFI1Q">
+  <product program-id="ACS" dataset-id="12_3YR" table-id="C15010"/>
+  <selection>
+    <dimension type="geo" vintage="2012">
+      <cat-id>0100000US.04000</cat-id>
+    </dimension>
+  </selection>
+</query>
