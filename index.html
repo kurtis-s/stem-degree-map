@@ -34,10 +34,6 @@ var projection = d3.geo.albersUsa()
 var path = d3.geo.path()
     .projection(projection);
 
-var color = d3.scale.linear()
-    .domain([0, 1])
-    .range(["#f2f0f7", "#54278f"]);
-
 var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
@@ -47,8 +43,11 @@ queue()
     .defer(d3.json, "engineer_counts.json")
     .await(ready);
 
-
 function ready(error, us, engineers) {
+
+  var color = d3.scale.linear()
+      .domain(d3.extent(d3.values(engineers.adjusted_STEM_count)))
+      .range(["#f2f0f7", "#54278f"]);
 
   svg.append("g")
       .attr("class", "state-land")
