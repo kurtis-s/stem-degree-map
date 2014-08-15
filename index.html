@@ -47,7 +47,7 @@ function ready(error, us, engineers) {
 
   var color = d3.scale.linear()
       .domain(d3.extent(d3.values(engineers.adjusted_STEM_count)))
-      .range(["#f2f0f7", "#54278f"]);
+      .range(["#FCFCFC", "blue"]);
 
   svg.append("g")
       .attr("class", "state-land")
