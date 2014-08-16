@@ -2,16 +2,6 @@
 <meta charset="utf-8">
 <style>
 
-.land {
-  fill: #222;
-}
-
-.county-boundary {
-  fill: none;
-  stroke: #fff;
-  stroke-width: .5px;
-}
-
 .state-boundary {
   fill: none;
   stroke: #fff;
@@ -77,11 +67,11 @@ function ready(error, us, engineers) {
 
           toolTipDiv.transition()        
                       .duration(200)      
-                      .style("opacity", .9);      
-                      toolTipDiv.html(engineers.state_name[d.id] + "<br/>" 
-                                     + "Count: " + Math.round(engineers.adjusted_STEM_count[d.id]))
-                      .style("left", xPosition + "px")     
-                      .style("top", yPosition + "px");    
+                      .style("opacity", .9);
+
+          toolTipDiv.html(engineers.state_name[d.id] + "<br/>" + "Count: " + Math.round(engineers.adjusted_STEM_count[d.id]))
+                     .style("left", xPosition + "px")     
+                     .style("top", yPosition + "px");    
       })
       .attr("d", path)
       .style("fill", function(d) { return color(engineers.adjusted_STEM_count[d.id]); });
