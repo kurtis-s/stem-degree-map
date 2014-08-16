@@ -27,9 +27,10 @@ engineer_counts = pd.DataFrame.from_items([
 engineer_counts.set_index(['geo_id'], inplace=True)
 
 #Adjust the STEM count by dividing by that state's population
-engineer_counts['adjusted_STEM_count'] = engineer_counts['STEM_count'] / engineer_counts['total_population']
+#Multiply by 1000 to get the number of engineers per 1000 people
+engineer_counts['adjusted_STEM_count'] = (1000 * engineer_counts['STEM_count']) / engineer_counts['total_population']
 #Rescale for a max of 1
-engineer_counts['adjusted_STEM_count'] /= engineer_counts['adjusted_STEM_count'].max()
+engineer_counts['rebased_adjusted_STEM_count'] = engineer_counts['adjusted_STEM_count'] / engineer_counts['adjusted_STEM_count'].max()
 
 engineer_counts.to_json('engineer_counts.json')
 engineer_counts.to_csv('engineer_counts.csv')
