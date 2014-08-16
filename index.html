@@ -17,12 +17,28 @@
   stroke: #fff;
 }
 
+div.tooltip {   
+  position: absolute;           
+  text-align: center;           
+  padding: 2px;             
+  background: white;
+  border: 0px;      
+  pointer-events: none;         
+  display: inline-block;
+  border-radius: 10px;
+  text-align: left;
+}
+
 </style>
 <body>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="http://d3js.org/topojson.v1.min.js"></script>
 <script src="http://d3js.org/queue.v1.min.js"></script>
 <script>
+
+var toolTipDiv = d3.select("body").append("div")   
+    .attr("class", "tooltip")               
+    .style("opacity", 0);
 
 var width = 960,
     height = 500;
@@ -54,6 +70,19 @@ function ready(error, us, engineers) {
     .selectAll("path")
       .data(topojson.feature(us, us.objects.us_geoJSON).features)
     .enter().append("path")
+      .on("mouseover", function(d) {
+          var rect = this.getBoundingClientRect();
+          var xPosition = (rect.right + rect.left) / 2.0;
+          var yPosition = (rect.bottom + rect.top) / 2.0;
+
+          toolTipDiv.transition()        
+                      .duration(200)      
+                      .style("opacity", .9);      
+                      toolTipDiv.html(engineers.state_name[d.id] + "<br/>" 
+                                     + "Count: " + Math.round(engineers.adjusted_STEM_count[d.id]))
+                      .style("left", xPosition + "px")     
+                      .style("top", yPosition + "px");    
+      })
       .attr("d", path)
       .style("fill", function(d) { return color(engineers.adjusted_STEM_count[d.id]); });
 
