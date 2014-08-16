@@ -73,6 +73,11 @@ function ready(error, us, engineers) {
                      .style("left", xPosition + "px")     
                      .style("top", yPosition + "px");    
       })
+      .on("mouseout", function(d) {
+          toolTipDiv.transition()
+                     .duration(200)
+                     .style("opacity", 0);
+      })
       .attr("d", path)
       .style("fill", function(d) { return color(engineers.adjusted_STEM_count[d.id]); });
 
