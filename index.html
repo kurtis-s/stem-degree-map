@@ -61,9 +61,12 @@ function ready(error, us, engineers) {
       .data(topojson.feature(us, us.objects.us_geoJSON).features)
     .enter().append("path")
       .on("mouseover", function(d) {
+          var bodyRect = document.body.getBoundingClientRect(),
+              elemRect = this.getBoundingClientRect();
+
           var rect = this.getBoundingClientRect();
-          var xPosition = (rect.right + rect.left) / 2.0;
-          var yPosition = (rect.bottom + rect.top) / 2.0;
+          var xPosition = elemRect.left - bodyRect.left;
+          var yPosition = elemRect.top - bodyRect.top;
 
           toolTipDiv.transition()        
                       .duration(200)      
