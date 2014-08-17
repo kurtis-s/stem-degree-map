@@ -1,29 +1,13 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<style>
-
-.state-boundary {
-  fill: none;
-  stroke: #fff;
-}
-
-div.tooltip {   
-  position: absolute;           
-  text-align: center;           
-  padding: 2px;             
-  background: white;
-  border: 0px;      
-  pointer-events: none;         
-  display: inline-block;
-  border-radius: 10px;
-  text-align: left;
-}
-
-</style>
+<head>
+    <meta charset="utf-8">
+    <title>Science and Engineering Degrees by State</title>
+    <link rel="stylesheet" type="text/css" href="states.css">
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
+    <script src="http://d3js.org/queue.v1.min.js"></script>
+</head>
 <body>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script src="http://d3js.org/topojson.v1.min.js"></script>
-<script src="http://d3js.org/queue.v1.min.js"></script>
 <script>
 
 var toolTipDiv = d3.select("body").append("div")   
