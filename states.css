@@ -1,0 +1,16 @@
+.state-boundary {
+  fill: none;
+  stroke: #fff;
+}
+
+div.tooltip {   
+  position: absolute;           
+  text-align: center;           
+  padding: 2px;             
+  background: white;
+  border: 0px;      
+  pointer-events: none;         
+  display: inline-block;
+  border-radius: 10px;
+  text-align: left;
+}
