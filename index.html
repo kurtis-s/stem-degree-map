@@ -24,7 +24,7 @@ var projection = d3.geo.albersUsa()
 var path = d3.geo.path()
     .projection(projection);
 
-var svg = d3.select("#stem-chloropleth").append("svg")
+var stemsvg = d3.select("#stem-chloropleth").append("svg")
     .attr("width", width)
     .attr("height", height);
 
@@ -39,7 +39,7 @@ function ready(error, us, engineers) {
       .domain(d3.extent(d3.values(engineers.adjusted_STEM_count)))
       .range(["#FCFCFC", "blue"]);
 
-  svg.append("g")
+  stemsvg.append("g")
       .attr("class", "state-land")
     .selectAll("path")
       .data(topojson.feature(us, us.objects.us_geoJSON).features)
@@ -68,7 +68,7 @@ function ready(error, us, engineers) {
       .attr("d", path)
       .style("fill", function(d) { return color(engineers.adjusted_STEM_count[d.id]); });
 
-  svg.append("path")
+  stemsvg.append("path")
       .datum(topojson.mesh(us, us.objects.us_geoJSON, function(a, b) { return a.id !== b.id; }))
       .attr("class", "state-boundary")
       .attr("d", path);
