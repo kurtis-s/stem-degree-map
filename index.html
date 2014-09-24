@@ -8,7 +8,7 @@
     <script src="http://d3js.org/queue.v1.min.js"></script>
 </head>
 <body>
-<div class="wpd3-43-0"></div>
+<div id="stem-chloropleth"></div>
 <script>
 var toolTipDiv = d3.select("body").append("div")   
     .attr("class", "tooltip")               
@@ -24,7 +24,7 @@ var projection = d3.geo.albersUsa()
 var path = d3.geo.path()
     .projection(projection);
 
-var svg = d3.select(".wpd3-43-0").append("svg")
+var svg = d3.select("#stem-chloropleth").append("svg")
     .attr("width", width)
     .attr("height", height);
 
